@@ -8,8 +8,9 @@
             <div class="card-header">Edit Post</div>
 
             <div class="card-body">
-              <form class="" action="{{ route('post.store') }}" method="post">
+              <form class="" action="{{ route('post.update', $post) }}" method="post">
                 {{ csrf_field() }}
+                {{ method_field('PATCH') }}
                 <div class="form-group">
                   <label for="">Title</label>
                   <input type="text" class="form-control" id="" placeholder="Post title" name="title" value="{{ $post->title }}">

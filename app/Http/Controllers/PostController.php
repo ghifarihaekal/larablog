@@ -29,13 +29,30 @@ class PostController extends Controller
         'category_id' => request('category_id')
       ]);
 
-      return redirect('/home');
+      return redirect()->route('post.index');
     }
 
-    public function edit($id)
+    public function edit(Post $post)
     {
-      $post = Post::find($id);
       $categories = Category::all();
       return view('post.edit', compact('post', 'categories'));
+    }
+
+    public function update(Post $post)
+    {
+      $post->update([
+        'title' => request('title'),
+        'category_id' => request('category_id'),
+        'content' => request('content'),
+      ]);
+
+      return redirect()->route('post.index');
+    }
+
+    public function destroy(Post $post)
+    {
+      $post->delete();
+
+      return redirect()->route('post.index');
     }
 }
